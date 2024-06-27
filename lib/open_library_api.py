@@ -1,4 +1,4 @@
-import requests
+from flask import request
 import json
 
 
@@ -16,7 +16,7 @@ class Search:
 
         URL = f"https://openlibrary.org/search.json?title={search_term_formatted}&fields={fields_formatted}&limit={limit}"
 
-        response = requests.get(URL)
+        response = request.get(URL)
         return response.content
 
     def get_search_results_json(self):
@@ -29,7 +29,7 @@ class Search:
 
         URL = f"https://openlibrary.org/search.json?title={search_term_formatted}&fields={fields_formatted}&limit={limit}"
         print(URL)
-        response = requests.get(URL)
+        response = request.get(URL)
         return response.json()
 
     def get_user_search_results(self, search_term):
@@ -40,7 +40,7 @@ class Search:
 
         URL = f"https://openlibrary.org/search.json?title={search_term_formatted}&fields={fields_formatted}&limit={limit}"
 
-        response = requests.get(URL).json()
+        response = request.get(URL).json()
         response_formatted = f"Title: {response['docs'][0]['title']}\nAuthor: {response['docs'][0]['author_name'][0]}"
         return response_formatted
 
